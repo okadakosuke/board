@@ -84,6 +84,7 @@ public void update(User user) {
 		}
 	}
 
+
 	public List<User> getUsers() {
 
 		Connection connection = null;
@@ -106,4 +107,5 @@ public void update(User user) {
 			close(connection);
 		}
 	}
+
 }

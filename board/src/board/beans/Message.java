@@ -9,7 +9,7 @@ public class Message implements Serializable {
 	private int id;
 	private String title;;
 	private String text;
-	private String categoly;
+	private String category;
 	private Date insert_date;
 	private int user_id;
 
@@ -37,12 +37,12 @@ public class Message implements Serializable {
 		this.text = text;
 	}
 
-	public String getCategoly() {
-		return categoly;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setCategoly(String categoly) {
-		this.categoly = categoly;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public Date getInsert_Date() {

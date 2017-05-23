@@ -62,31 +62,7 @@ public class UserDao {
 		}
 	}
 
-	private List<User> toUserList(ResultSet rs) throws SQLException {
 
-		List<User> ret = new ArrayList<User>();
-		try {
-			while (rs.next()) {
-				String name = rs.getString("name");
-				String login_id = rs.getString("login_id");
-				String password = rs.getString("password");
-				String branch_id = rs.getString("branch_id");
-				String department_id = rs.getString("department_id");
-
-				User user = new User();
-				user.setName(name);
-				user.setLogin_id(login_id);
-				user.setPassword(password);
-				user.setBranch_id(branch_id);
-				user.setDepartment_id(department_id);
-
-				ret.add(user);
-			}
-			return ret;
-		}finally {
-			close(rs);
-		}
-	}
 	public void insert(Connection connection, User user) {
 
 		PreparedStatement ps = null;
@@ -140,7 +116,7 @@ public class UserDao {
 
 
 			sql.append(" WHERE");
-			sql.append(" id = ?");
+			sql.append(" id =?");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -172,7 +148,7 @@ public class UserDao {
 			ps = connection.prepareStatement(sql.toString());
 
 			ResultSet rs = ps.executeQuery();
-			List<User> ret = toUsersList(rs);
+			List<User> ret = toUserList(rs);
 			return ret;
 		} catch(SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -180,18 +156,20 @@ public class UserDao {
 			close(ps);
 		}
 	}
-	private List<User> toUsersList(ResultSet rs)
+	private List<User> toUserList(ResultSet rs)
 		throws SQLException {
 
 		List<User> ret = new ArrayList<User>();
 		try {
 			while(rs.next()) {
+				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String login_id = rs.getString("login_id");
 				String branch_id = rs.getString("branch_id");
 				String department_id = rs.getString("department_id");
 
 				User user = new User();
+				user.setId(id);
 				user.setName(name);
 				user.setLogin_id(login_id);
 				user.setBranch_id(branch_id);

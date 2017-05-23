@@ -23,20 +23,22 @@
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
 <form action="setting"method="post"><br />
+	<input type="hidden" name="id" value="${editUser.id }" >
+
 	<label for="name">名称</label>
-	<input name="name" id="name"/>(１０字以内)<br />
+	<input name="name" id="name" value="${editUser.name}"/>(１０字以内)<br />
 
 	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id"/>(半角英数字６～２０字)<br />
+	<input name="login_id" id="login_id" value="${editUser.login_id}"/>(半角英数字６～２０字)<br />
 
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>(半角文字６～２５５字)<br />
+	<input name="password" type="password" id="password" value="${editUser.password}"/>(半角文字６～２５５字)<br />
 
 	<label for="branch_id">支店名</label>
-	<input name="branch_id" id="branch_id"/><br />
+	<input name="branch_id" id="branch_id" value="${editUser.branch_id}"/><br />
 
 	<label for="department_id">部署・役職名</label>
-	<input name="department_id" id="department_id"/><br />
+	<input name="department_id" id="department_id" value="${editUser.department_id}"/><br />
 
 	<input type="submit" value="登録" /><br /><br />
 	<a href="./">戻る</a>

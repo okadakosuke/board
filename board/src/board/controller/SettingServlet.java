@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -27,13 +26,11 @@ public class SettingServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-		User loginUser = (User) session.getAttribute("loginUser");
+		String userid = request.getParameter("id");
+		int user_id = Integer.parseInt(userid);
+		User editUser = new UserService().getUser(user_id);
 
-		if(session.getAttribute("editUser") == null) {
-			User editUser = new UserService().getUser(loginUser.getId());
-			session.setAttribute("editUser", editUser);
-		}
+		request.setAttribute("editUser", editUser);
 		request.getRequestDispatcher("setting.jsp").forward(request, response);
 	}
 
@@ -42,38 +39,37 @@ public class SettingServlet extends HttpServlet{
 		throws ServletException,IOException {
 
 		List<String> users = new ArrayList<String>();
-		HttpSession session = request.getSession();
 
 		User editUser = getEditUser(request);
-		session.setAttribute("editUser",editUser);
+		request.setAttribute("editUser", editUser);
 
 		if(isValid(request, users) == true) {
-
 
 			try{
 				new UserService().update(editUser);
 			} catch(NoRowsUpdatedRuntimeException e) {
-				session.removeAttribute("editUser");
+				request.removeAttribute("editUser");
 				users.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
-				session.setAttribute("errorMessages", users);
+				request.setAttribute("errorMessages", users);
 				response.sendRedirect("setting");
 			}
 
-			session.setAttribute("loginUser", editUser);
-			session.removeAttribute("editUser");
+			request.setAttribute("user", editUser);
+			request.removeAttribute("editUser");
 
 			response.sendRedirect("./");
 		} else {
-			session.setAttribute("errorMessages", users);
-			response.sendRedirect("setting");
+			request.setAttribute("errorMessages", users);
+			request.getRequestDispatcher("setting.jsp").forward(request, response);
 		}
 	}
 
 	private User getEditUser(HttpServletRequest request)
 			throws IOException, ServletException {
 
-		HttpSession session = request.getSession();
-		User editUser = (User) session.getAttribute("editUser");
+		String userid = request.getParameter("id");
+		int user_id = Integer.parseInt(userid);
+		User editUser = new UserService().getUser(user_id);
 
 		editUser.setName(request.getParameter("name"));
 		editUser.setLogin_id(request.getParameter("login_id"));

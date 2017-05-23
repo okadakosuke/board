@@ -22,19 +22,9 @@ public class manageServlet extends HttpServlet {
 ServletException{
 
 
-		User user = (User) request.getSession().getAttribute("loginUser");
-		boolean isShowUserForm;
-		if (user != null) {
-			isShowUserForm = true;
-		} else {
-			isShowUserForm = false;
-		}
-
 		List<User> users = new UserService().getUsers();
 
 		request.setAttribute("users", users);
-		request.setAttribute("isShowUserForm", isShowUserForm);
-
 		request.getRequestDispatcher("./manage.jsp").forward(request, response);
 	}
 

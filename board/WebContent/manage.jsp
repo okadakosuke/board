@@ -20,18 +20,24 @@
     <th>department_id</th>
     <th>設定</th>
   </tr>
-<c:forEach items="${users}" var="user" >
-  <tr>
-    <td>${user.name }</td>
-    <td>${user.login_id}</td>
-    <td>${user.branch_id }</td>
-    <td>${user.department_id}</td>
-    	<form action="setting"method="post"></form>
-    <td><input type="submit" value="設定" /></td>
+
+
+	<c:forEach items="${users}" var="user" >
+	 <tr>
+		<td>${user.name }</td>
+   		<td>${user.login_id}</td>
+  		<td>${user.branch_id }</td>
+   	 	<td>${user.department_id}</td>
+
+   	 	<td>
+	   	 	<form action="setting" method="get">
+	   	 		<input type="hidden" name="id" value="${user.id }" >
+	   	 		<input type="submit" value="設定" />
+	   	 	</form>
+   	 	</td>
+
 
   </tr>
-
-
 </c:forEach>
 </table>
 <div class="copyright">わったい菜</div>

@@ -27,6 +27,17 @@
 	</c:if>
 </div>
 
+
+<div class="messages">
+	<c:forEach items="${messages}" var="message">
+		<div class="title"><c:out value="${messages.title}" /></div>
+		<div class="text"><c:out value="${messages.text}" /></div>
+		<div class="category"><c:out value="${messages.category}" /></div>
+	</c:forEach>
+</div>
+</form>
+
+
 <div class="copyright">わったい菜</div>
 </div>
 </body>
