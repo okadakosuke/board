@@ -32,11 +32,13 @@ public class CommentServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+
 		List<String> comments = new ArrayList<String>();
+		HttpSession session = request.getSession();
 
 		if (isValid(request, comments) == true) {
 
-			HttpSession session = request.getSession();
+
 			User user = (User) session.getAttribute("loginUser");
 			int message_id = Integer.parseInt(request.getParameter("message_id"));
 
@@ -51,7 +53,7 @@ public class CommentServlet extends HttpServlet {
 
 
 		} else {
-			request.setAttribute("errorMessages", comments);
+			session.setAttribute("errorMessages", comments);
 			response.sendRedirect("./");
 		}
 	}

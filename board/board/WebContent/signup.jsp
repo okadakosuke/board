@@ -11,6 +11,7 @@
 </head>
 <body>
 <h1>ユーザー新規登録</h1>
+	<a href="manage">戻る</a>
 <div class="main-contents"></div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessaes">
@@ -38,7 +39,12 @@
 	<select name="branch_id">
 		<option value="0">選択してください</option>
 			<c:forEach items="${branches}" var="branch">
-			<option value="${branch.id}">${branch.name}</option>
+			<c:if test="${newUser.branch_id == branch.id }">
+					<option selected value="${branch.id}">${branch.name } </option>
+				</c:if>
+				<c:if test="${newUser.branch_id != branch.id }">
+					<option  value="${branch.id}">${branch.name } </option>
+				</c:if>
 		</c:forEach>
 	</select>
 
@@ -46,12 +52,18 @@
 	<select name="department">
 		<option value="0">選択してください</option>
 			<c:forEach items="${departments }" var="department">
-				<option value="${department.id }">${department.name }</option><br />
+				<c:if test="${newUser.department_id == department.id }" >
+				<option selected value="${department.id}"> ${department.name } </option>
+				</c:if>
+				<c:if test="${newUser.department_id != department.id }" >
+				<option value ="${department.id }">${department.name }</option>
+				</c:if>
+
 			</c:forEach>
 	</select>
 
 	<input type="submit" value="登録" /><br /><br />
-	<a href="manage">戻る</a>
+
 </form>
 
 </body>

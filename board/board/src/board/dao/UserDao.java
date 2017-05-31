@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import board.beans.User;
 import board.exception.SQLRuntimeException;
 
@@ -102,7 +104,6 @@ public class UserDao {
 		}
 	}
 
-
 	public void update(Connection connection, User user) {
 
 		PreparedStatement ps = null;
@@ -111,9 +112,11 @@ public class UserDao {
 			sql.append("UPDATE users SET ");
 			sql.append("name =?");
 			sql.append(", login_id =?");
-			sql.append(", password =?");
 			sql.append(", branch_id =?");
 			sql.append(", department_id =?");
+			if(!StringUtils.isEmpty(user.getPassword())) {
+				sql.append(", password =?");
+			}
 
 
 			sql.append(" WHERE");
@@ -123,10 +126,18 @@ public class UserDao {
 
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getLogin_id());
-			ps.setString(3, user.getPassword());
-			ps.setInt(4, user.getBranch_id());
-			ps.setInt(5, user.getDepartment_id());
-			ps.setInt(6, user.getId());
+
+			ps.setInt(3, user.getBranch_id());
+			ps.setInt(4, user.getDepartment_id());
+			if(!StringUtils.isEmpty(user.getPassword())) {
+				ps.setString(5, user.getPassword());
+				ps.setInt(6, user.getId());
+			}else {
+				ps.setInt(5, user.getId());
+			}
+
+
+
 
 
 		ps.executeUpdate();
@@ -138,6 +149,56 @@ public class UserDao {
 		}
 	}
 
+	public User select(Connection connection, String login_id) {
+		PreparedStatement ps = null;
+		try {
+			String sql ="SELECT * FROM users WHERE login_id=?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setString(1, login_id);
+
+			ResultSet rs =ps.executeQuery();
+			List<User> ret =toUsermanageList(rs);
+
+			if(ret.size() == 0) {
+				return null;
+			}else {
+				return ret.get(0);
+			}
+
+
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+
+		}
+	}
+
+	private List<User> toUsermanageList(ResultSet rs)
+		throws SQLException {
+
+		List<User> ret = new ArrayList<User>();
+		try {
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String login_id = rs.getString("login_id");
+
+				User user = new User();
+				User different = new User();
+
+				user.setId(id);
+				user.setLogin_id(login_id);
+				different.setLogin_id(login_id);
+
+				ret.add(user);
+
+			}
+			return ret;
+		}finally {
+			close(rs);
+		}
+	}
 
 
 	public void stopUser(Connection connection, int user_id, int num) {

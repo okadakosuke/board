@@ -6,8 +6,10 @@ import static board.utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
+import board.beans.Message;
 import board.beans.User;
 import board.dao.UserDao;
+import board.dao.UserMessageDao;
 import board.utils.CipherUtil;
 
 public class UserService {
@@ -25,6 +27,29 @@ public class UserService {
 			userDao.insert(connection, user);
 
 			commit(connection);
+		}catch(RuntimeException e) {
+			rollback(connection);
+			throw e;
+		}catch(Error e) {
+			rollback(connection);
+			throw e;
+		}finally {
+			close(connection);
+		}
+	}
+
+
+	public User select(String login_id) {
+
+		Connection connection = null;
+		try{
+			connection = getConnection();
+
+			UserDao userDao = new UserDao();
+			User ret = userDao.select(connection, login_id);
+
+			commit(connection);
+			return ret;
 		}catch(RuntimeException e) {
 			rollback(connection);
 			throw e;
@@ -139,6 +164,30 @@ public void deleteUser(int userId) {
 			commit(connection);
 
 			return users;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+
+	public List<Message> getCategory() {
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+
+			UserMessageDao userMessageDao = new UserMessageDao();
+			List<Message> messages = userMessageDao.getCategory(connection);
+
+			commit(connection);
+
+			return messages;
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;

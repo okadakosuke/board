@@ -15,48 +15,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter("/*")
-public class LoginFilter implements Filter{
+import board.beans.User;
+
+@WebFilter(urlPatterns = {"/manage", "/signup", "/setting/*"})
+public class ManagerFilter implements Filter{
 	public void doFilter(ServletRequest request, ServletResponse response,
 		FilterChain chain){
+
 		try{
 
 			String target = ((HttpServletRequest)request).getRequestURI();
 			HttpSession session = ((HttpServletRequest)request).getSession();
+			String topURL ="/board";
 
-			String loginURL = "/board/login";
+			User user = (User) session.getAttribute("loginUser");
 
 
-			if(!target.equals(loginURL)) {
+			if(user.getDepartment_id() !=1) {
 
-				if (session == null) {
+				List<String> messages = new ArrayList<String>() ;
+				messages.add("権限がありません");
+				session.setAttribute("errorMessages", messages);
 
-					session = ((HttpServletRequest)request).getSession(true);
-					session.setAttribute("target", target);
+				session.setAttribute("target", target);
+				((HttpServletResponse) response).sendRedirect(topURL);
+				return;
 
-					List<String> messages = new ArrayList<String>() ;
-					messages.add("ログインしてください");
-					session.setAttribute("errorMessages", messages);
-;
-					((HttpServletResponse) response).sendRedirect(loginURL);
-					return;
-
-				} else {
-					Object loginCheck = session.getAttribute("loginUser");
-					if (loginCheck == null){
-
-						List<String> messages = new ArrayList<String>() ;
-						messages.add("ログインしてください");
-						session.setAttribute("errorMessages", messages);
-
-						session.setAttribute("target", target);
-						((HttpServletResponse) response).sendRedirect(loginURL);
-						return;
-					}
-				}
 			}
-
 			chain.doFilter(request, response);
+
 		}catch (ServletException se) {
 		}catch (IOException e){
 		}

@@ -42,6 +42,22 @@ public class CommentDao {
 			close(ps);
 		}
 	}
+	public void deleteComment(Connection connection, int comment_id) {
+		PreparedStatement ps = null;
+		try {
+			String sql ="DELETE FROM comments WHERE id=?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, comment_id);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+
+		}
+	}
 
 }
 

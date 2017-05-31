@@ -26,7 +26,6 @@ public class UserCommentDao {
 
 			ResultSet rs = ps.executeQuery();
 			List<UserComments> ret = toUserCommentList(rs);
-			System.out.println(ret.size());
 
 			return ret;
 		} catch(SQLException e) {
@@ -43,17 +42,23 @@ public class UserCommentDao {
 			try {
 				while(rs.next()) {
 					int id = rs.getInt("id");
+					int	user_id = rs.getInt("user_id");
 					String text = rs.getString("text");
 					Timestamp insert_date = rs.getTimestamp("insert_date");
 					int message_id = rs.getInt("message_id");
 					String name = rs.getString("name");
+					int department_id =rs.getInt("department_id");
+					int branch_id =rs.getInt("branch_id");
 
 					UserComments usercomment = new UserComments();
 					usercomment.setId(id);
+					usercomment.setUser_id(user_id);
 					usercomment.setText(text);
 					usercomment.setInsertDate(insert_date);
 					usercomment.setMessage_id(message_id);
 					usercomment.setName(name);
+					usercomment.setDepartment_id(department_id);
+					usercomment.setBranch_id(branch_id);
 
 					ret.add(usercomment);
 

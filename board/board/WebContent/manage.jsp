@@ -17,7 +17,7 @@
 <a href="./">戻る</a>
 <table>
   <tr>
-    <th>名称</th>
+    <th>名前</th>
     <th>ログインID</th>
     <th>支店</th>
     <th>部署・役職</th>
@@ -50,6 +50,7 @@
 	   	 		<input type="submit" value="編集" />
 	   	 	</form>
    	 	</td>
+   	 	<c:if test="${loginUser.id != user.id}">
    	 		<td>
    	 			<form action="stop" method="post">
    	 				<input type="hidden" name="id" value="${user.id }" >
@@ -63,16 +64,18 @@
 					</c:if>
    	 			</form>
    	 		</td>
+   	 		</c:if>
 
+		<c:if test="${loginUser.id != user.id}">
  	 	<td>
 	   	 	<form action="delete" method="post">
 	   	 		<input type="hidden" name="id" value="${user.id }" >
 	   	 		<input type="submit" value="削除" />
 	   	 	</form>
    	 	</td>
+   	 	</c:if>
 
-  </tr>
-</c:forEach>
+	</c:forEach>
 </table>
 </div>
 </body>

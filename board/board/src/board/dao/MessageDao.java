@@ -22,13 +22,16 @@ public class MessageDao {
 			sql.append(", category");
 			sql.append(", insert_date");
 			sql.append(", user_id");
+			sql.append(", department_id");
 			sql.append(") VALUES (");
 			sql.append("?"); // title
 			sql.append(", ?"); // text
 			sql.append(", ?"); // categoly
 			sql.append(", CURRENT_TIMESTAMP"); // insert_date
 			sql.append(", ?"); //user_id
+			sql.append(", ?");
 			sql.append(")");
+
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -36,6 +39,7 @@ public class MessageDao {
 			ps.setString(2, message.getText());
 			ps.setString(3, message.getCategory());
 			ps.setInt(4, message.getUser_id());
+			ps.setInt(5, message.getDepartment_id());
 
 			System.out.println(ps);
 			ps.executeUpdate();
@@ -43,6 +47,23 @@ public class MessageDao {
 			throw new SQLRuntimeException(e);
 		} finally {
 			close(ps);
+		}
+	}
+
+	public void deleteMessage(Connection connection, int message_id) {
+		PreparedStatement ps = null;
+		try {
+			String sql ="DELETE FROM messages WHERE id=?";
+
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, message_id);
+
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new SQLRuntimeException(e);
+		}finally{
+			close(ps);
+
 		}
 	}
 

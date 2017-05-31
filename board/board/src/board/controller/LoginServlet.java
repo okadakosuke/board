@@ -44,7 +44,7 @@ ServletException {
 		}else {
 
 			List<String> messages = new ArrayList<String>() ;
-			messages.add("ログインに失敗しました。");
+			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("login");
 		}

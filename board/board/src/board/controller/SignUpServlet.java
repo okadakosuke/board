@@ -45,7 +45,9 @@ public class SignUpServlet extends HttpServlet{
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
 
-		if(isValid(request, messages) == true) {
+		User differentUser = new UserService().select(request.getParameter("login_id"));
+
+		if(isValid(request, messages, differentUser) == true) {
 
 			User user = new User();
 			user.setName(request.getParameter("name"));
@@ -59,6 +61,12 @@ public class SignUpServlet extends HttpServlet{
 
 			response.sendRedirect("./manage");
 		}else{
+
+			List<Branch> branches = new BranchService().getBranch();
+			request.setAttribute("branches", branches);
+
+			List<Department> departments = new DepartmentService().getDepartment();
+			request.setAttribute("departments", departments);
 
 			User newUser = getNewUser(request);
 			request.setAttribute("newUser", newUser);
@@ -76,13 +84,13 @@ public class SignUpServlet extends HttpServlet{
 		newUser.setLogin_id(request.getParameter("login_id"));
 		newUser.setPassword(request.getParameter("password"));
 		newUser.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		newUser.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		newUser.setDepartment_id(Integer.parseInt(request.getParameter("department")));
 
 		return newUser;
 	}
 
 
-	private boolean isValid(HttpServletRequest request, List<String> messages){
+	private boolean isValid(HttpServletRequest request, List<String> messages, User differentUser){
 		String name = request.getParameter("name");
 		String login_id = request.getParameter("login_id");
 		String password = request.getParameter("password");
@@ -95,9 +103,13 @@ public class SignUpServlet extends HttpServlet{
 		}
 		if(StringUtils.isEmpty(login_id) == true) {
 			messages.add("ログインIDを入力してください");
+		}else if((login_id.matches("\\w{6,20}")) != true) {
+			messages.add("ログインIDは半角英数字の６～２０文字で入力してください");
 		}
 		if(StringUtils.isEmpty(password) == true) {
 			messages.add("パスワードを入力してください");
+		}else if((password.matches("\\w{6,255}")) !=true) {
+			messages.add("パスワードは半角英数字の６～２５５文字で入力してください");
 		}
 		if(branch_id == 0) {
 			messages.add("支店名を選択してください");
@@ -108,6 +120,16 @@ public class SignUpServlet extends HttpServlet{
 		if(StringUtils.equals(password, checkPassword) ==false) {
 			messages.add("パスワードを確認用と同一のものにしてください");
 		}
+		if(differentUser != null){
+			messages.add("ログインIDが重複しています");
+		}
+		if((branch_id !=1 && department_id ==1 || department_id ==2) ==true){
+			messages.add("支店名と部署・役職が対応していません");
+		}
+		if((branch_id ==1 && department_id !=1 && department_id !=2) ==true){
+			messages.add("支店名と部署・役職が対応していません");
+		}
+
 		if(messages.size() ==0) {
 			return true;
 		}else {

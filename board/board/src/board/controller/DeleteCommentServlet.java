@@ -8,25 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.service.UserService;
+import board.service.CommentService;
 
 
 
-@WebServlet(urlPatterns = { "/delete" })
-public class DeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = { "/delete_comment" })
+public class DeleteCommentServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String userid = request.getParameter("id");
-		int user_id = Integer.parseInt(userid);
-		new UserService().deleteUser(user_id);
+		String commentid = request.getParameter("comment_id");
+		int comment_id = Integer.parseInt(commentid);;
+		new CommentService().deleteComment(comment_id);
 
 
-
-		response.sendRedirect("./manage");
+		response.sendRedirect("./");
 
 
 
