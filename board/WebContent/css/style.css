@@ -1,0 +1,321 @@
+*{
+margin-left:0px;
+}
+
+body {
+	background-color: white;
+	width:100%
+	font-size:15px;
+}
+
+.main-contents {
+	margin-top: 00px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: #ffffff;
+	height: 100%;
+	width: 1000px;
+}
+
+
+/* --- ナビゲーションバー --- */
+div.nav {
+width: 100%; /* ナビゲーションの幅 */
+background-color: #ffffff; /* ナビゲーションの背景色 */
+border-top: 1px #cccccc solid; /* 上境界線 */
+border-bottom: 1px #cccccc solid; /* 下境界線 */
+
+}
+
+div.nav #logout{
+	color : red ;
+	width: 100%;
+	float: right;
+}
+
+
+/* --- メニューエリア --- */
+div.nav ul.nl {
+width: 450px; /* メニューの幅 */
+margin-left: 15px; /* センターに配置 */
+padding: 0;
+background-color: #ffffff; /* メニューの背景色 */
+border-right: 1px #ffffff solid; /* メニューの右境界線 */
+list-style-type: none;
+text-align: center;
+
+}
+/* ---ログアウト --- */
+.logout h3 a {
+margin-left: 120px;
+}
+
+
+/* --- メニュー項目 --- */
+div.nav ul.nl li {
+font-size: 18px;
+font-color: white
+width: 33.3%; /* 項目の幅 */
+float: left;
+}
+
+/* --- リンク --- */
+div.nav ul.nl li a {
+display: block;
+position: relative; /* IE6用 */
+padding: 8px 2px; /* リンクエリアのパディング（上下、左右） */
+
+}
+/* --- ポイント時の設定 --- */
+div.nav ul.nl li a:hover {
+background-color: #c1ffaa; /* ポイント時の背景色 */
+}
+
+/* --- clearfix --- */
+.clearFix:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+
+
+.clearFix {
+min-height: 1px;
+}
+
+.tweet-box {
+	width: 780px;
+	height: 56px;
+	color: black;
+}
+
+input, select, textarea {
+background-color: white;
+}
+
+.header {
+	text-align: left;
+}
+
+
+
+.comments {
+	background-color: #ffffff;
+}
+/* --- 投稿ボックス --- */
+.main-contents .message {
+width: 800px; /* ボックスの幅 */
+padding-bottom: 5px; /* ボックスの下パディング */
+background: #ffffff url(maru2_300_bottom.gif) no-repeat bottom; /* ボックスの背景 */
+color: #000000;
+border-color: black;
+border-style: insert;
+margin: auto;
+}
+
+/* --- 投稿見出し --- */
+.main-contents .message h3 {
+margin: 0; /* 見出しのマージン */
+padding: 1em 15px 0 10px; /* 見出しのパディング（上右下左） */
+background: #9b0409 url(maru2_300_top.gif) no-repeat top; /* 見出しの背景 */
+color: #ffffff;
+font-size: 180%; /* 見出しの文字サイズ */
+}
+
+/* --- 投稿ボックス内の段落 --- */
+.main-contents.message p {
+margin: 1em 15px 1em 10px; /* 段落のマージン（上右下左） */
+}
+
+div.category p {
+font-size: 150%;
+font-weight: 400;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+div.time {
+font-size: 100%;
+border-bottom: 2px solid  #9b0409;
+}
+
+div.text pre {
+font-size: 200%;
+font-weight: 800;
+
+}
+
+
+div.name p {
+font-size: 150%;
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+
+
+/* --- コメントボックス --- */
+.main-contents .comments {
+margin-left: 100px;
+width: 700px; /* ボックスの幅 */
+padding-bottom: 5px; /* ボックスの下パディング */
+background: #ffffff url(maru2_300_bottom.gif) no-repeat bottom; /* ボックスの背景 */
+font-size: 120%;
+color: #000000;
+border-color: black;
+border-style: insert;
+margin-left: 200px;
+}
+
+
+/* --- コメント見出し --- */
+.main-contents .comments h3 {
+padding: 1em 15px 0 10px; /* 見出しのパディング（上右下左） */
+width: 675px;
+background: #0000a0 url(maru2_300_top.gif) no-repeat top; /* 見出しの背景 */
+color: #ffffff;
+font-size: 120%; /* 見出しの文字サイズ */
+margin-bottom: 10px;
+}0
+
+/* --- コメントボックス内の段落 --- */
+.main-contents.comments p {
+margin: 1em 15px 1em 10px; /* 段落のマージン（上右下左） */
+}
+
+
+
+.comments div.time {
+font-size: 80%;
+border-bottom: 2px solid  #0000a0;
+
+}
+
+.comments div.text pre{
+font-size: 150%;
+font-weight: 500;
+
+}
+
+
+.comments div.name p{
+font-size: 100%;
+margin-top: 0px;
+margin-bottom: 10px;
+}
+
+h1 {
+background-color: #9b0409;
+color:#ffffff;
+
+}
+
+h2 {
+	margin-left:15px;
+}
+
+
+
+
+/* --- ログインページ --- */
+.loginbox form{
+width: 500px; /* ボックスの幅 */
+padding-bottom: 1px; /* ボックスの下パディング */
+background: #ffffff url(maru1_300_bottom.gif) no-repeat bottom; /* ボックスの背景 */
+}
+/* --- ボックス内の段落 --- */
+.loginbox form{
+margin: 1em 10px; /* 段落のマージン（上下、左右） */
+}
+
+.loginbox label {
+	color: black;
+	text-align: justify;
+}
+
+div .managetable {
+
+    border-collapse: collapse;
+
+    text-align: left;
+
+    line-height: 1.5;
+
+    border-top: 1px solid #ccc;
+
+    border-bottom: 1px solid #ccc;
+
+	margin-top:20px;
+	margin-left:20px;
+}
+
+div .managetable thead th {
+
+    width: 1200px;
+
+    padding: 10px;
+
+    font-weight: bold;
+
+    vertical-align: top;
+
+    color: #fff;
+
+    background: #9b0409;
+
+}
+
+div .managetable td {
+
+    width: 350px;
+
+    padding: 10px;
+
+    vertical-align: top;
+
+}
+
+div .managetable .even {
+
+   background: #fee9eb;
+
+}
+
+
+.form-area .tweet-box {
+	width:695px;
+	margin-left:200px;
+}
+.form-area .com {
+	margin-left:200px;
+}
+.form-area .bot {
+	margin-left:200px;
+}
+
+div.focus {
+	margin-left:120px;
+
+}
+
+.form-area .tweet-box2 {
+	width:450px;
+	margin-left:0px;
+}
+
+div .signup {
+	manage-left:8px;
+}
+
+div .errorMessages {
+	color:red;
+	font-size:20px;
+}
+div .errorMessages li {
+	color:red;
+	font-size:20;
+}
+
