@@ -9,9 +9,9 @@ public class User implements Serializable {
 	private String login_id;
 	private String name;
 	private String password;
-	private String branch_id;
-	private String department_id;
-	private int is_deleated;
+	private int branch_id;
+	private int department_id;
+	private int is_deleted;
 
 	public int getId() {
 		return id;
@@ -45,27 +45,29 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getBranch_id() {
+	public int getBranch_id() {
 		return branch_id;
 	}
 
-	public void setBranch_id(String branch_id) {
+	public void setBranch_id(int branch_id) {
 		this.branch_id = branch_id;
 	}
 
-	public String getDepartment_id() {
+	public int getDepartment_id() {
 		return department_id;
 	}
 
-	public void setDepartment_id(String department_id) {
+	public void setDepartment_id(int department_id) {
 		this.department_id = department_id;
 	}
 
-	public int getIs_deleated() {
-		return is_deleated;
+	public int getIs_deleted() {
+		return is_deleted;
 	}
 
-	public void setIs_deleated(int is_deleated) {
-		this.is_deleated = is_deleated;
+	public void setIs_deleted(int is_deleated) {
+		this.is_deleted = is_deleated;
 	}
+
+
 }

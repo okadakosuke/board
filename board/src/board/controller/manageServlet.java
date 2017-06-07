@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import board.beans.Branch;
+import board.beans.Department;
 import board.beans.User;
+import board.service.BranchService;
+import board.service.DepartmentService;
 import board.service.UserService;
 
 @WebServlet(urlPatterns = { "/manage" })
@@ -23,6 +27,12 @@ ServletException{
 
 
 		List<User> users = new UserService().getUsers();
+		List<Branch> branches = new BranchService().getBranch();
+		request.setAttribute("branches", branches);
+
+		List<Department> departments = new DepartmentService().getDepartment();
+		request.setAttribute("departments", departments);
+
 
 		request.setAttribute("users", users);
 		request.getRequestDispatcher("./manage.jsp").forward(request, response);

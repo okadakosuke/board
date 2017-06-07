@@ -39,13 +39,12 @@ ServletException {
 		HttpSession session = request.getSession();
 		if (user != null) {
 
-			System.out.println("ok");
 			session.setAttribute("loginUser", user);
 			response.sendRedirect("./");
 		}else {
 
 			List<String> messages = new ArrayList<String>() ;
-			messages.add("ログインに失敗しました。");
+			messages.add("ログインに失敗しました");
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("login");
 		}

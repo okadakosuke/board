@@ -8,11 +8,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ログイン画面</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>掲示板</h1>
-<div class=main-contents>
+<h1>ログイン画面</h1>
 
+<div class="main-contents">
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -25,17 +26,23 @@
 
 </c:if>
 
-<form action="login" method="post"><br />
-	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id"/> <br />
+<div class="loginbox">
+<form action="login" method="post">
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/><br />
 
+	<div>
+		<label for="login_id">ログインID</label><br>
+		<input name="login_id" id="login_id"/>
+	</div>
+	<div>
+		<label for="password">パスワード</label><br>
+		<input name="password" type="password" id="password"/>
+	</div><br>
 	<input type="submit" value="ログイン" /><br />
-	<a href="./">戻る</a>
+
+
 </form>
-<div class="copyright">わったい菜掲示板</div>
+</div>
 </div>
 
 </body>

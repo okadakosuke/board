@@ -8,39 +8,74 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ユーザー新規登録画面</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>ユーザー登録</h1>
-<div class="main-contents"></div>
+
+
+<h1>ユーザー新規登録</h1>
+<div class="nav">
+	<ul class="nl clearFix">
+	<li><a href="manage">戻る</a></li>
+
+	</ul>
+
+<div class="main-contents">
 <c:if test="${ not empty errorMessages }">
-	<div class="errorMessaes">
+	<div class="errorMessages">
 		<ul>
 			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
-				</c:forEach>
-				</ul>
+				<li><c:out value="${message}" /></li>
+			</c:forEach>
+		</ul>
 	</div>
 	<c:remove var="errorMessages" scope="session"/>
 </c:if>
+
 <form action="signup"method="post"><br />
-	<label for="name">名称</label>
-	<input name="name" id="name"/>(１０字以内)<br />
+	<div class="signup">
+	<label for="name">名前(10字まで)</label><br>
+	<input name="name" id="name" value="${newUser.name }"/><br />
 
-	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id"/>(半角英数字６～２０字)<br />
+	<label for="login_id">ログインID(半角英数字6～20字)</label><br>
+	<input name="login_id" id="login_id" value="${newUser.login_id }"/><br />
 
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password"/>(半角文字６～２５５字)<br />
+	<label for="password">パスワード(半角文字6～255字)</label><br>
+	<input name="password" type="password" id="password"/><br />
+	<label for="password">パスワード(再入力)</label><br>
+	<input name="checkPassword" type="password" id="checkPassword"/><br />
 
-	<label for="branch_id">支店名</label>
-	<input name="branch_id" id="branch_id"/><br />
+	<label for="branch_id">支店名</label><br>
+	<select name="branch_id">
+		<option value="0">選択してください</option>
+			<c:forEach items="${branches}" var="branch">
+			<c:if test="${newUser.branch_id == branch.id }">
+					<option selected value="${branch.id}">${branch.name } </option>
+				</c:if>
+				<c:if test="${newUser.branch_id != branch.id }">
+					<option  value="${branch.id}">${branch.name } </option>
+				</c:if>
+		</c:forEach>
+	</select>
 
-	<label for="department_id">部署・役職名</label>
-	<input name="department_id" id="department_id"/><br />
+	<br><label for="department">部署・役職</label><br>
+	<select name="department">
+		<option value="0">選択してください</option>
+			<c:forEach items="${departments }" var="department">
+				<c:if test="${newUser.department_id == department.id }" >
+				<option selected value="${department.id}"> ${department.name } </option>
+				</c:if>
+				<c:if test="${newUser.department_id != department.id }" >
+				<option value ="${department.id }">${department.name }</option>
+				</c:if>
 
-	<input type="submit" value="登録" /><br /><br />
-	<a href="./">戻る</a>
+			</c:forEach>
+	</select>
+
+	<br /><br /><input type="submit" value="登録" />
+</div>
 </form>
-<div class="copyright">わったい菜掲示板</div>
+</div>
+</div>
 </body>
 </html>

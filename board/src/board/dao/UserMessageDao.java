@@ -40,13 +40,13 @@ public class UserMessageDao {
 			ps = connection.prepareStatement(sql.toString());
 
 
+
 			ps.setString(1, timedate);
 			ps.setString(2, finishdate);
 			if(!StringUtils.isEmpty(categorybox)) {
 			ps.setString(3, categorybox);
 			}
 
-			System.out.println(ps);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

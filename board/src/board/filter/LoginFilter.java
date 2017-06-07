@@ -22,9 +22,9 @@ public class LoginFilter implements Filter{
 		try{
 
 			String target = ((HttpServletRequest)request).getRequestURI();
-			System.out.println(target);
-			HttpSession session = ((HttpServletRequest)request).getSession();
 
+			HttpSession session = ((HttpServletRequest)request).getSession();
+			System.out.println(session);
 			String loginURL = "/board/login";
 
 

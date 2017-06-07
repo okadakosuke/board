@@ -12,6 +12,16 @@ public class Message implements Serializable {
 	private String category;
 	private Date insert_date;
 	private int user_id;
+	private int department_id;
+	private String categorybox;
+
+	public int getDepartment_id() {
+		return department_id;
+	}
+
+	public void setDepartment_id(int department_id) {
+		this.department_id = department_id;
+	}
 
 	public int getId() {
 		return id;
@@ -45,11 +55,11 @@ public class Message implements Serializable {
 		this.category = category;
 	}
 
-	public Date getInsert_Date() {
+	public Date getInsert_date() {
 		return insert_date;
 	}
 
-	public void setInsertDate(Date insert_date) {
+	public void setInsert_date(Date insert_date) {
 		this.insert_date = insert_date;
 	}
 
@@ -58,6 +68,14 @@ public class Message implements Serializable {
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getCategorybox() {
+		return categorybox;
+	}
+
+	public void setCategorybox(String categorybox) {
+		this.categorybox = categorybox;
 	}
 
 }

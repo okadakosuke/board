@@ -298,6 +298,7 @@ div .managetable .even {
 
 div.focus {
 	margin-left:120px;
+	font-size:25px;
 
 }
 
@@ -318,4 +319,11 @@ div .errorMessages li {
 	color:red;
 	font-size:20;
 }
+input[type="submit"]{
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  background: #dcdce4;
+  color: #0c020a;
 
+}
